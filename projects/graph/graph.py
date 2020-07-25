@@ -12,19 +12,24 @@ class Graph:
     def add_vertex(self, vertex_id):
         """
         Add a vertex to the graph.
+
         """
+
+        self.vertices[vertex_id] = set()
         pass  # TODO
 
     def add_edge(self, v1, v2):
         """
         Add a directed edge to the graph.
         """
+        self.vertices[v1].add(v2)
         pass  # TODO
 
     def get_neighbors(self, vertex_id):
         """
         Get all neighbors (edges) of a vertex.
         """
+        return self.vertices[vertex_id]
         pass  # TODO
 
     def bft(self, starting_vertex):
@@ -32,13 +37,39 @@ class Graph:
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        queue = Queue()
+        visited = set()
+
+        queue.enqueue(starting_vertex)
+
+        while queue.size() > 0:
+            current_node = queue.dequeue()
+
+            if current_node not in visited:
+                print(current_node)
+                visited.add(current_node)
+                neighborhood = self.get_neighbors(current_node)
+                for neighbor in neighborhood:
+                    queue.enqueue(neighbor)
+         pass  # TODO
 
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
+        stack = Stack()
+        visited = set()
+        stack.push(starting_vertex)
+
+        while stack.size() > 0:
+            current_node = stack.pop()
+            if current_node not in vistied:
+                print(current_node)
+                visited.add(current_node)
+                neighborhood = self.get_neighbors(current_node)
+                for neighbor in neighborhood:
+                    stack.push(neighbor)
         pass  # TODO
 
     def dft_recursive(self, starting_vertex):
@@ -48,6 +79,12 @@ class Graph:
 
         This should be done using recursion.
         """
+        if starting_vertex not in visted:
+            print(starting_vertex)
+            visited.add(starting_vertex)
+            neighborhood = self.get_neighbors(starting_vertex)
+            for neighbor in neighborhood:
+                self.dft_recursive(neighbor, visited)
         pass  # TODO
 
     def bfs(self, starting_vertex, destination_vertex):
